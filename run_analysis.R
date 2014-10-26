@@ -46,7 +46,15 @@ run_analysis <- function(){
   
   #Naming the variables
   colnames(extractedData) <- c("Subject", as.character(features[,2][mean_or_std]), "Training")
-  
+  #Modify the name of the variables to make them more comprensible
+  colnames(extractedData) = gsub("()","", colnames(extractedData), fixed=TRUE)
+  colnames(extractedData) = gsub("-mean","Mean", colnames(extractedData), fixed=TRUE)
+  colnames(extractedData) = gsub("-std","StandardDeviation", colnames(extractedData), fixed=TRUE)
+  colnames(extractedData) = gsub("Freq","Frequency", colnames(extractedData), fixed=TRUE)
+  colnames(extractedData) = gsub("tBody","timeBody", colnames(extractedData), fixed=TRUE)
+  colnames(extractedData) = gsub("tGravity","timeGravity", colnames(extractedData), fixed=TRUE)
+  colnames(extractedData) = gsub("fBody","frequencyBody", colnames(extractedData), fixed=TRUE)
+
   
   #Melt the data frame with Subject and Training.
   dataMelt <- melt(extractedData, id.vars=c("Subject", "Training"))
